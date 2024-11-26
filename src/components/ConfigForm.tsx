@@ -38,7 +38,7 @@ const ConfigForm: React.FC<ConfigFormProps> = ({ runScraper }) => {
   }
 
   return (
-    <form className="flex w-[300px] flex-col items-start justify-start gap-1">
+    <form className="flex w-[400px] flex-col items-start justify-start gap-1 rounded-lg border-2 border-white/15 p-2">
       <h2 className="text-l font-poppins font-semibold">Gegevens van Eleven Travel</h2>
       <label className="text-l font-poppins font-medium text-white text-opacity-60">Hoofd URL padsegment</label>
       <input
