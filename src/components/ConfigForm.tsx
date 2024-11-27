@@ -30,6 +30,14 @@ const ConfigForm: React.FC<ConfigFormProps> = ({ runScraper }) => {
   }
 
   function submitForm(urlSnippet: string, eventSlug: string, mainPage: string, fragmentedPages: boolean, recipiant: string) {
+    if (urlSnippet === 'test') {
+      urlSnippet = 'thunderdome-alpha-zaterdag-2024';
+      eventSlug = 'thunderdome-alpha';
+      mainPage = 'https://www.partybussen.nl/festivals/thunderdome-alpha-zaterdag-2024';
+      fragmentedPages = true;
+      recipiant = 'gijs@kantoor.geen-gedoe.nl';
+    }
+
     if (!urlSnippet || !eventSlug || !mainPage || !recipiant) {
       console.error('Alle parameters moeten een waarde hebben.');
       return;

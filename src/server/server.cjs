@@ -1,14 +1,16 @@
 const express = require('express');
-const { run } = require('../main');
+const { run } = require('../main.cjs');
 
 const app = express();
-const port = 5000;
+const port = 3500;
 
 app.use(express.json());
 
-app.post('/run-scraper', async (req, res) => {
+app.post('/run', async (req, res) => {
   try {
-    await run();
+    console.log('Starting run()');
+    const { urlSnippet, eventSlug, mainPage, fragmentedPages, recipiant } = req.body;
+    await run(urlSnippet, eventSlug, mainPage, fragmentedPages, recipiant);
     res.status(200).send('Scraping complete!');
   } catch (error) {
     res.status(500).send('Error running scraper: ' + error.message);

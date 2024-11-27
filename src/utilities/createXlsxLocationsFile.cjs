@@ -72,7 +72,7 @@ async function createLocationsExcelFile(data, xlsxDocName) {
 
   const currentDate = `${day}-${month}-${year}`;
 
-  const filePath = `./output/data_locations_${xlsxDocName}_${currentDate}.xlsx`;
+  const filePath = `src/output/data_locations_${xlsxDocName}_${currentDate}.xlsx`;
   await workbook.xlsx.writeFile(filePath);
   console.log(`Excel file with location-based data created successfully at ${currentDate}.`);
 

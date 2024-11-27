@@ -1,22 +1,26 @@
 const puppeteer = require('puppeteer');
-const fetchElevenTravelData = require('./api/fetchElevenTravelData');
-const createLocationMatches = require('./utilities/createLocationMatches');
-const createXlsxProvincesFile = require('./utilities/createXlsxProvincesFile');
-const createXlsxLocationsFile = require('./utilities/createXlsxLocationsFile');
+const fetchElevenTravelData = require('./api/fetchElevenTravelData.cjs');
+const createLocationMatches = require('./utilities/createLocationMatches.cjs');
+const createXlsxProvincesFile = require('./utilities/createXlsxProvincesFile.cjs');
+const createXlsxLocationsFile = require('./utilities/createXlsxLocationsFile.cjs');
 
-async function run(urlSnippet, eventSlug, mainPage, fragmentedPage, recipiant) {
+async function run(urlSnippet, slug, mainPage, fragmentedPage, recipiant) {
+  if (!slug) {
+    return;
+  }
+
   // Partybussen
   const baseUrl = mainPage;
   const baseUrlHasBranches = fragmentedPage;
   const baseUrlBranch = urlSnippet;
 
   // Eleven Travel
-  const eventSlug = eventSlug;
+  const eventSlug = slug;
 
   // Algemeen
   const xlsxDocName = eventSlug;
 
-  const browser = await puppeteer.launch({ headless: false, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
   const page = await browser.newPage();
 
   const selectors = [
@@ -153,7 +157,7 @@ async function run(urlSnippet, eventSlug, mainPage, fragmentedPage, recipiant) {
     }
 
     if (pbCities.length == pbLocations.length && pbLocations.length == pbPrices.length) {
-      let { etCities, etLocations, etPrices } = await fetchElevenTravelData(eventSlug);
+      let { etCities, etLocations, etPrices } = await fetchElevenTravelData(slug);
       const matchedData = createLocationMatches(pbProvinces, pbCities, pbLocations, pbPrices, etCities, etLocations, etPrices);
       const data = [['provincies', 'stad', 'locatie_pb', 'locatie_et', 'locatie_match', 'prijs_pb', 'prijs_et', 'prijs_verschil'], ...matchedData];
       createXlsxLocationsFile(data, xlsxDocName);
@@ -163,9 +167,11 @@ async function run(urlSnippet, eventSlug, mainPage, fragmentedPage, recipiant) {
     }
   } catch (error) {
     console.log('Error: ' + error);
+    throw error;
   } finally {
     await browser.close();
   }
 }
 
-run();
+//run();
+module.exports = { run };

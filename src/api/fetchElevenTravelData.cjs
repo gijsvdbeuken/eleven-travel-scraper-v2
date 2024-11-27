@@ -3,14 +3,14 @@ const cheerio = require('cheerio');
 
 const url = 'https://eleventravel.nl/wp-admin/admin-ajax.php';
 
-const payload = {
-  action: 'fetch_boarding_locations',
-  all: true,
-  event_slug: 'qlimax',
-};
-
-async function fetchBoardingLocations() {
+async function fetchBoardingLocations(eventSlug) {
   try {
+    const payload = {
+      action: 'fetch_boarding_locations',
+      all: true,
+      event_slug: eventSlug,
+    };
+
     const response = await fetch(url, {
       method: 'POST',
       headers: {

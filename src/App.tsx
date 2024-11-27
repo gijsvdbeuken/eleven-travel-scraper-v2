@@ -1,6 +1,5 @@
 import './App.css';
 import ConfigForm from './components/ConfigForm';
-//import { main } from 'scraper/main.js';
 
 function App() {
   function runScraper(urlSnippet: string, eventSlug: string, mainPage: string, fragmentedPages: boolean, recipiant: string) {
@@ -12,22 +11,38 @@ function App() {
     console.log('fragmentedPages: ' + fragmentedPages);
     console.log('recipiant: ' + recipiant);
 
-    fetch('http://localhost:5000/run-scraper', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        urlSnippet,
-        eventSlug,
-        mainPage,
-        fragmentedPages,
-        recipiant,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error('Error:', error));
+    async function fetchData() {
+      try {
+        const response = await fetch('http://localhost:3500/run', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            urlSnippet,
+            eventSlug,
+            mainPage,
+            fragmentedPages,
+            recipiant,
+          }),
+        });
+        if (!response.ok) {
+          console.error('Raw response:', response);
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const contentType = response.headers.get('Content-Type');
+        let data;
+        if (contentType && contentType.includes('application/json')) {
+          data = await response.json();
+        } else {
+          data = await response.text();
+        }
+        console.log('Response:', data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+    fetchData();
   }
 
   return (

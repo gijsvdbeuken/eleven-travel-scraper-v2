@@ -64,7 +64,7 @@ async function createProvincesExcelFile(data, xlsxDocName) {
 
   const currentDate = `${day}-${month}-${year}`;
 
-  const filePath = `./output/data_provinces_${xlsxDocName}_${currentDate}.xlsx`;
+  const filePath = `src/output/data_provinces_${xlsxDocName}_${currentDate}.xlsx`;
   await workbook.xlsx.writeFile(filePath);
   console.log(`Excel file with province-based data created successfully at ${currentDate}.`);
 }
