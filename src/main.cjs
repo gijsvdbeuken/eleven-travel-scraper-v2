@@ -9,15 +9,10 @@ async function run(urlSnippet, slug, mainPage, fragmentedPage, recipiant) {
     return;
   }
 
-  // Partybussen
   const baseUrl = mainPage;
   const baseUrlHasBranches = fragmentedPage;
   const baseUrlBranch = urlSnippet;
-
-  // Eleven Travel
   const eventSlug = slug;
-
-  // Algemeen
   const xlsxDocName = eventSlug;
 
   const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });

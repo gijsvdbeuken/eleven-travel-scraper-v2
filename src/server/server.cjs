@@ -13,7 +13,7 @@ app.post('/run', async (req, res) => {
     await run(urlSnippet, eventSlug, mainPage, fragmentedPages, recipiant);
     res.status(200).send('Scraping complete!');
   } catch (error) {
-    res.status(500).send('Error running scraper: ' + error.message);
+    throw error;
   }
 });
 

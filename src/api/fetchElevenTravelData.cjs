@@ -50,6 +50,7 @@ async function fetchBoardingLocations(eventSlug) {
 
     return { etCities, etLocations, etPrices };
   } catch (error) {
+    throw error;
     console.error('Error:', error);
     return { etCities: [], etLocations: [], etPrices: [] };
   }

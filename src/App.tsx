@@ -1,15 +1,13 @@
 import './App.css';
 import ConfigForm from './components/ConfigForm';
+import { useState } from 'react';
+import ErrorPopup from './components/ErrorPopup';
 
 function App() {
+  const [error, setError] = useState({ active: false, message: '' });
+
   function runScraper(urlSnippet: string, eventSlug: string, mainPage: string, fragmentedPages: boolean, recipiant: string) {
-    console.log('Values used for scraper:');
-    console.log('---');
-    console.log('urlSnippet: ' + urlSnippet);
-    console.log('eventSlug: ' + eventSlug);
-    console.log('mainPage: ' + mainPage);
-    console.log('fragmentedPages: ' + fragmentedPages);
-    console.log('recipiant: ' + recipiant);
+    console.log('Values used for scraper: ' + urlSnippet + ' ' + eventSlug + ' ' + mainPage + ' ' + fragmentedPages + ' ' + recipiant);
 
     async function fetchData() {
       try {
@@ -39,7 +37,11 @@ function App() {
         }
         console.log('Response:', data);
       } catch (error) {
-        console.error('Error:', error);
+        if (error instanceof Error) {
+          setError({ active: true, message: error.message + '. Controleer of alle velden correct zijn ingevuld en of de server actief is.' });
+        } else {
+          setError({ active: true, message: 'An unknown error occurred' });
+        }
       }
     }
     fetchData();
@@ -47,7 +49,8 @@ function App() {
 
   return (
     <>
-      <ConfigForm runScraper={runScraper} />
+      <ErrorPopup error={error} />
+      <ConfigForm setError={setError} runScraper={runScraper} />
     </>
   );
 }
