@@ -1,6 +1,4 @@
-# Eleven Travel Scraper
-
-![chrome-extension-readme](src/assets/images/chrome-extension-readme.jpg)
+# Eleven Travel scraper
 
 ## Inhoudsopgave
 
@@ -64,4 +62,58 @@ Volg de onderstaande stappen om het project op te zetten:
    ```
 2. Dit start een lokale server waarop de scraper draait. Je kunt nu het scraperproces testen.
 
+Hier is een herschreven en verbeterde versie van het gedeelte van je README:
+
 ## Gebruik
+
+Na een succesvolle installatie van de Chrome-extensie ziet de interface er als volgt uit:
+
+![chrome-extension-readme](src/assets/images/chrome-extension-readme.jpg)
+
+De scraper vereist vijf gegevens om het scrapingproces uit te voeren. Volg de onderstaande stappen om deze informatie te verzamelen:
+
+### **Stap 1: Event slug ophalen**
+
+1. Open de hoofdpagina van het festival op [ElevenTravel.nl](https://eleventravel.nl) en ga naar het overzicht van bustickets, zoals weergegeven in de onderstaande afbeelding.
+
+   ![eleventravel.nl-opstaplocaties](src/assets/images/eleventravel.nl-opstaplocaties.jpg)
+
+2. Klik met de rechtermuisknop op de pagina en kies **Element inspecteren**. Navigeer naar het tabblad **Network**.
+
+   - Klik op de knop **Toon alle opstaplocaties**.
+   - Er verschijnt een nieuw verzoek met de naam `admin-ajax.php` in de kolom **Name**.
+   - Klik op dit verzoek om de **event slug** te bekijken.
+
+   ![eleventravel.nl-event-slug](src/assets/images/eleventravel.nl-event-slug.jpg)
+
+---
+
+### Stap 2: Hoofdpagina van het festival op Partybussen.nl
+
+Ga naar [Partybussen.nl](https://partybussen.nl) en zoek het festival waarvan je gegevens wilt verzamelen. Kopieer de URL van de hoofdpagina uit de adresbalk.
+
+> **Let op:** Zorg ervoor dat je de link van de hoofdpagina kopieert en niet die van een provinciepagina binnen het festival.
+
+---
+
+### Stap 3: Padsegment van het festival op Partybussen.nl
+
+Het padsegment identificeert het specifieke festival in de URL. Bijvoorbeeld:
+
+Uit de volgende URL:  
+`https://www.partybussen.nl/festivals/thunderdome-alpha-zaterdag-2024`
+
+is **thunderdome-alpha-zaterdag-2024** het padsegment.
+
+---
+
+### Stap 4: Gefragmenteerde pagina’s op Partybussen.nl?
+
+Controleer of de busprijzen zijn opgesplitst over subpagina’s per provincie.
+
+- Als de prijzen niet direct zichtbaar zijn op de hoofdpagina van het festival, zijn de pagina’s **gefragmenteerd**.
+- Een voorbeeld van een gefragmenteerde structuur:
+
+  ![partybussen.nl-gefragmenteerde-paginas](src/assets/images/partybussen.nl-gefragmenteerde-paginas.jpg)
+
+Met deze stappen heb je alle benodigde gegevens verzameld om de scraper succesvol te gebruiken.
