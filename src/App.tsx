@@ -7,14 +7,8 @@ function App() {
   const [error, setError] = useState({ active: false, message: '' });
   const [processing, setProcessing] = useState<boolean>(false);
 
-<<<<<<< HEAD
-  function runScraper(urlSnippet: string, eventSlug: string, mainPage: string, fragmentedPages: boolean, recipiant: string) {
-    console.log('Values used for scraper: ' + urlSnippet + ' ' + eventSlug + ' ' + mainPage + ' ' + fragmentedPages + ' ' + recipiant);
-
-=======
   function runScraper(urlSnippet: string, eventSlug: string, mainPage: string, fragmentedPages: boolean) {
     console.log('Values used for scraper: ' + urlSnippet + ' ' + eventSlug + ' ' + mainPage + ' ' + fragmentedPages);
->>>>>>> dev
     async function fetchData() {
       try {
         setProcessing(true);
@@ -28,10 +22,6 @@ function App() {
             eventSlug,
             mainPage,
             fragmentedPages,
-<<<<<<< HEAD
-            recipiant,
-=======
->>>>>>> dev
           }),
         });
         if (!response.ok) {
@@ -61,12 +51,6 @@ function App() {
     fetchData();
   }
 
-<<<<<<< HEAD
-  return (
-    <>
-      <ErrorPopup error={error} />
-      <ConfigForm setError={setError} processing={processing} runScraper={runScraper} />
-=======
   function runSummary() {
     async function fetchResponse() {
       try {
@@ -110,7 +94,6 @@ function App() {
     <>
       <ErrorPopup error={error} />
       <ConfigForm setError={setError} processing={processing} runScraper={runScraper} runSummary={runSummary} />
->>>>>>> dev
     </>
   );
 }

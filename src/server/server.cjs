@@ -1,14 +1,9 @@
 const express = require('express');
-<<<<<<< HEAD
-const { run } = require('../main.cjs');
-
-=======
 const { run } = require('../scraper/scraper.cjs');
 const fs = require('fs');
 const path = require('path');
 const archiver = require('archiver');
 const xlsx = require('xlsx');
->>>>>>> dev
 const app = express();
 const port = 3500;
 
@@ -16,22 +11,14 @@ app.use(express.json());
 
 app.post('/run', async (req, res) => {
   try {
-<<<<<<< HEAD
-    console.log('Starting run()');
-    const { urlSnippet, eventSlug, mainPage, fragmentedPages, recipiant } = req.body;
-    await run(urlSnippet, eventSlug, mainPage, fragmentedPages, recipiant);
-=======
     const { urlSnippet, eventSlug, mainPage, fragmentedPages } = req.body;
     await run(urlSnippet, eventSlug, mainPage, fragmentedPages);
->>>>>>> dev
     res.status(200).send('Scraping complete!');
   } catch (error) {
     throw error;
   }
 });
 
-<<<<<<< HEAD
-=======
 app.post('/chat', async (req, res) => {
   try {
     const { message } = req.body;
@@ -140,7 +127,6 @@ app.get('/download-files', (req, res) => {
   });
 });
 
->>>>>>> dev
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
