@@ -11,8 +11,15 @@
     "server": "node src/server/server.cjs"
   },
   "dependencies": {
+<<<<<<< HEAD
     "cheerio": "^1.0.0",
     "csv-writer": "^1.6.0",
+=======
+    "archiver": "^7.0.1",
+    "cheerio": "^1.0.0",
+    "csv-writer": "^1.6.0",
+    "docx": "^9.1.0",
+>>>>>>> dev
     "exceljs": "^4.4.0",
     "express": "^4.21.1",
     "fs": "^0.0.1-security",
@@ -25,6 +32,11 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
+<<<<<<< HEAD
+=======
+    "@types/archiver": "^6.0.3",
+    "@types/nodemailer": "^6.4.17",
+>>>>>>> dev
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.3",
