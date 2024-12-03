@@ -1,4 +1,4 @@
-# Eleven Travel scraper
+# Eleven Travel Scraper
 
 ![chrome-extension-readme](src/assets/images/chrome-extension-readme.jpg)
 
