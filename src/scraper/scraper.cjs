@@ -1,8 +1,8 @@
 const puppeteer = require('puppeteer');
-const fetchElevenTravelData = require('./api/fetchElevenTravelData.cjs');
-const createLocationMatches = require('./utilities/createLocationMatches.cjs');
-const createXlsxProvincesFile = require('./utilities/createXlsxProvincesFile.cjs');
-const createXlsxLocationsFile = require('./utilities/createXlsxLocationsFile.cjs');
+const fetchElevenTravelData = require('../api/fetchElevenTravelData.cjs');
+const createLocationMatches = require('../utilities/matchLocations.cjs');
+const createXlsxProvincesFile = require('../utilities/createProvinceFile.cjs');
+const createXlsxLocationsFile = require('../utilities/createLocationFile.cjs');
 
 async function run(urlSnippet, slug, mainPage, fragmentedPage) {
   if (!slug) {
@@ -120,18 +120,15 @@ async function run(urlSnippet, slug, mainPage, fragmentedPage) {
       for (let i = 0; i < 12; i++) {
         const selector = `a[href="${selectors[i].url}"]`;
         console.log(`Waiting for link selector: ${selector}`);
-
-        // Check if the element exists using page.$()
         const elementHandle = await page.$(selector);
         if (!elementHandle) {
           console.log(`Selector ${selector} not found, skipping...`);
-          continue; // Skip to the next iteration of the loop if the selector doesn't exist
+          continue;
         }
 
         console.log('Link selector found!');
         console.log('Current URL:', page.url());
 
-        // Use the elementHandle directly to click, since we know it exists now
         await page.evaluate((el) => {
           el.click();
         }, elementHandle);
@@ -169,9 +166,4 @@ async function run(urlSnippet, slug, mainPage, fragmentedPage) {
   }
 }
 
-//run();
 module.exports = { run };
-
-//a[href="/festivals/free-your-mind-kingsday-2025-vrijdag/provincie-9-zuid-holland#province-9"]
-
-//<ahref="/festivals/free-your-mind-kingsday-2025-vrijdag/provincie-9-zuid-holland#province-9">

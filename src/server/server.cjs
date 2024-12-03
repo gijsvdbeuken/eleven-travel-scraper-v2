@@ -1,9 +1,9 @@
 const express = require('express');
-const { run } = require('../main.cjs');
+const { run } = require('../scraper/scraper.cjs');
 const fs = require('fs');
 const path = require('path');
+const archiver = require('archiver');
 const xlsx = require('xlsx');
-
 const app = express();
 const port = 3500;
 
@@ -99,6 +99,32 @@ app.post('/write-summary-doc', (req, res) => {
       console.error('Error saving document:', error);
       res.status(500).send('Error saving document');
     });
+});
+
+app.get('/download-files', (req, res) => {
+  fs.readdir(outputFolder, (err, files) => {
+    if (err) {
+      return res.status(500).send('Error reading the output directory');
+    }
+    files = files.filter((file) => fs.statSync(path.join(outputFolder, file)).isFile());
+    files.sort((a, b) => fs.statSync(path.join(outputFolder, b)).mtime - fs.statSync(path.join(outputFolder, a)).mtime);
+    const latestFiles = files.slice(0, 2);
+
+    if (latestFiles.length === 0) {
+      return res.status(404).send('No files found in the output directory');
+    }
+
+    const archive = archiver('zip', { zlib: { level: 9 } });
+    res.attachment('latest_files.zip');
+
+    archive.pipe(res);
+
+    latestFiles.forEach((file) => {
+      archive.file(path.join(outputFolder, file), { name: file });
+    });
+
+    archive.finalize();
+  });
 });
 
 app.listen(port, () => {

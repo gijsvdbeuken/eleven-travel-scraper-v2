@@ -1,15 +1,3 @@
-/*
-urlSnippet = 'thunderdome-alpha-zaterdag-2024';
-eventSlug = 'thunderdome-alpha';
-mainPage = 'https://www.partybussen.nl/festivals/thunderdome-alpha-zaterdag-2024';
-fragmentedPages = true;
-*/
-
-// free-your-mind-kingsday
-// https://www.partybussen.nl/festivals/free-your-mind-kingsday-2025-vrijdag
-// https://www.partybussen.nl/festivals/free-your-mind-kingsday-2025-vrijdag/provincie-9-zuid-holland#province-9
-// free-your-mind-kingsday-2025-vrijdag
-
 import { useState } from 'react';
 
 interface ErrorState {
@@ -37,7 +25,7 @@ const ConfigForm: React.FC<ConfigFormProps> = ({ setError, processing, runScrape
   const [summary, setSummary] = useState<boolean>(false);
 
   function submitForm(urlSnippet: string, eventSlug: string, mainPage: string, fragmentedPages: boolean, summary: boolean) {
-    if (eventSlug === 'x') {
+    if (eventSlug === 'template') {
       urlSnippet = 'free-your-mind-kingsday-2025-vrijdag';
       eventSlug = 'free-your-mind-kingsday';
       mainPage = 'https://www.partybussen.nl/festivals/free-your-mind-kingsday-2025-vrijdag';
