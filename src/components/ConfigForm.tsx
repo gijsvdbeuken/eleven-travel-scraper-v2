@@ -5,6 +5,11 @@ mainPage = 'https://www.partybussen.nl/festivals/thunderdome-alpha-zaterdag-2024
 fragmentedPages = true;
 */
 
+// free-your-mind-kingsday
+// https://www.partybussen.nl/festivals/free-your-mind-kingsday-2025-vrijdag
+// https://www.partybussen.nl/festivals/free-your-mind-kingsday-2025-vrijdag/provincie-9-zuid-holland#province-9
+// free-your-mind-kingsday-2025-vrijdag
+
 import { useState } from 'react';
 
 interface ErrorState {
@@ -33,9 +38,9 @@ const ConfigForm: React.FC<ConfigFormProps> = ({ setError, processing, runScrape
 
   function submitForm(urlSnippet: string, eventSlug: string, mainPage: string, fragmentedPages: boolean, summary: boolean) {
     if (eventSlug === 'x') {
-      urlSnippet = 'thunderdome-alpha-zaterdag-2024';
-      eventSlug = 'thunderdome-alpha';
-      mainPage = 'https://www.partybussen.nl/festivals/thunderdome-alpha-zaterdag-2024';
+      urlSnippet = 'free-your-mind-kingsday-2025-vrijdag';
+      eventSlug = 'free-your-mind-kingsday';
+      mainPage = 'https://www.partybussen.nl/festivals/free-your-mind-kingsday-2025-vrijdag';
       fragmentedPages = true;
     }
     setError({ active: false, message: '' });

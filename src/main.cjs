@@ -15,7 +15,7 @@ async function run(urlSnippet, slug, mainPage, fragmentedPage) {
   const eventSlug = slug;
   const xlsxDocName = eventSlug;
 
-  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+  const browser = await puppeteer.launch({ headless: false, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
   const page = await browser.newPage();
 
   const selectors = [
@@ -121,19 +121,20 @@ async function run(urlSnippet, slug, mainPage, fragmentedPage) {
         const selector = `a[href="${selectors[i].url}"]`;
         console.log(`Waiting for link selector: ${selector}`);
 
-        await page.waitForSelector(selector, { timeout: 30000 });
-        console.log('Link selector found!');
+        // Check if the element exists using page.$()
+        const elementHandle = await page.$(selector);
+        if (!elementHandle) {
+          console.log(`Selector ${selector} not found, skipping...`);
+          continue; // Skip to the next iteration of the loop if the selector doesn't exist
+        }
 
+        console.log('Link selector found!');
         console.log('Current URL:', page.url());
 
-        await page.evaluate((sel) => {
-          const element = document.querySelector(sel);
-          if (element) {
-            element.click();
-            return true;
-          }
-          return false;
-        }, selector);
+        // Use the elementHandle directly to click, since we know it exists now
+        await page.evaluate((el) => {
+          el.click();
+        }, elementHandle);
 
         console.log('Click attempt completed. Waiting for potential navigation...');
 
@@ -170,3 +171,7 @@ async function run(urlSnippet, slug, mainPage, fragmentedPage) {
 
 //run();
 module.exports = { run };
+
+//a[href="/festivals/free-your-mind-kingsday-2025-vrijdag/provincie-9-zuid-holland#province-9"]
+
+//<ahref="/festivals/free-your-mind-kingsday-2025-vrijdag/provincie-9-zuid-holland#province-9">
