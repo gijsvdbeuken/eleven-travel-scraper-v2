@@ -1,50 +1,59 @@
-# React + TypeScript + Vite
+# Eleven Travel Scraper README
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Vereisten
 
-Currently, two official plugins are available:
+Voor dit project is het aan te raden om de volgende software te installeren:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. **Visual Studio Code (VSCode)** – Een krachtige en veelzijdige editor voor code. Het gebruik van VSCode is optioneel, maar het wordt wel aanbevolen voor een betere ervaring.
 
-## Expanding the ESLint configuration
+   - Download het hier: [Visual Studio Code](https://code.visualstudio.com/)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+2. **Node.js** – Een JavaScript runtime-omgeving die nodig is om het project te draaien.
+   - Download het hier: [Node.js](https://nodejs.org/)
 
-- Configure the top-level `parserOptions` property like this:
+## Stap 1: Downloaden van het project
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. Ga naar de GitHub-pagina van het project.
+2. Klik op de groene knop **"Code"** en kies **"Download ZIP"**.
+3. Zet het ZIP-bestand op je bureaublad of een andere locatie op je computer.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Stap 2: Het project openen in VSCode (optioneel)
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. Open **Visual Studio Code** (VSCode).
+2. Sleep de gedownloade folder (de ZIP-bestanden uitgepakt) naar VSCode om het project te openen.
+3. VSCode zal nu het project openen en je kunt de volgende stappen uitvoeren.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Stap 3: Installeren van de benodigde afhankelijkheden
+
+1. Zorg ervoor dat je in VSCode de **Terminal** opent (via **View > Terminal** of `Ctrl + ~`).
+2. In de terminal kun je de benodigde afhankelijkheden installeren door het volgende commando uit te voeren:
+
+   ```bash
+   npm install
+   ```
+
+   Dit installeert alle benodigde afhankelijkheden voor het project.
+
+3. Voer daarna het volgende commando uit om de bestanden te bouwen:
+   ```bash
+   npm run build
+   ```
+
+## Stap 4: Chrome extensie toevoegen
+
+1. Na het uitvoeren van de bouwopdracht, wordt er een `dist` map aangemaakt.
+2. Open **Chrome** en ga naar de extensiespagina via `chrome://extensions/`.
+3. Zet de "Developer mode" aan rechtsboven in het scherm.
+4. Klik op de knop **"Load unpacked"** en selecteer de `dist` map die zojuist is aangemaakt.
+
+## Stap 5: De server draaien
+
+1. Na het toevoegen van de extensie kun je de server starten door het volgende commando uit te voeren in de terminal:
+   ```bash
+   npm run server
+   ```
+2. Dit start een lokale server waarop de scraper draait. Je kunt nu het scraperproces testen.
+
+---
+
+**Veel succes met het gebruiken van de Eleven Travel scraper!**
