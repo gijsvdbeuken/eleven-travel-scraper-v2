@@ -102,12 +102,14 @@ app.post('/write-summary-doc', (req, res) => {
 });
 
 app.get('/download-files', (req, res) => {
-  fs.readdir(outputFolder, (err, files) => {
+  const outputDir = path.resolve(process.cwd(), 'src', 'output');
+  console.log('Attempting to read directory:', outputDir);
+  fs.readdir(outputDir, (err, files) => {
     if (err) {
       return res.status(500).send('Error reading the output directory');
     }
-    files = files.filter((file) => fs.statSync(path.join(outputFolder, file)).isFile());
-    files.sort((a, b) => fs.statSync(path.join(outputFolder, b)).mtime - fs.statSync(path.join(outputFolder, a)).mtime);
+    files = files.filter((file) => fs.statSync(path.join(outputDir, file)).isFile());
+    files.sort((a, b) => fs.statSync(path.join(outputDir, b)).mtime - fs.statSync(path.join(outputDir, a)).mtime);
     const latestFiles = files.slice(0, 2);
 
     if (latestFiles.length === 0) {
@@ -120,7 +122,7 @@ app.get('/download-files', (req, res) => {
     archive.pipe(res);
 
     latestFiles.forEach((file) => {
-      archive.file(path.join(outputFolder, file), { name: file });
+      archive.file(path.join(outputDir, file), { name: file });
     });
 
     archive.finalize();
