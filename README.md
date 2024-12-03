@@ -74,11 +74,11 @@ De scraper vereist vijf gegevens om het scrapingproces uit te voeren. Volg de on
 
 ### **Stap 1: Event slug ophalen**
 
-1. Open de hoofdpagina van het festival op [ElevenTravel.nl](https://eleventravel.nl) en ga naar het overzicht van bustickets, zoals weergegeven in de onderstaande afbeelding.
+1. Open de hoofdpagina van het festival op Eleventravel.nl en ga naar het overzicht van bustickets, zoals weergegeven in de onderstaande afbeelding.
 
    ![eleventravel.nl-opstaplocaties](src/assets/images/eleventravel.nl-opstaplocaties.jpg)
 
-2. Klik met de rechtermuisknop op de pagina en kies **Element inspecteren**. Navigeer naar het tabblad **Network**.
+2. Klik met de rechtermuisknop op de pagina en kies **Inspecteren**. Navigeer naar het tabblad **Network**.
 
    - Klik op de knop **Toon alle opstaplocaties**.
    - Er verschijnt een nieuw verzoek met de naam `admin-ajax.php` in de kolom **Name**.
@@ -86,15 +86,11 @@ De scraper vereist vijf gegevens om het scrapingproces uit te voeren. Volg de on
 
    ![eleventravel.nl-event-slug](src/assets/images/eleventravel.nl-event-slug.jpg)
 
----
-
 ### Stap 2: Hoofdpagina van het festival op Partybussen.nl
 
-Ga naar [Partybussen.nl](https://partybussen.nl) en zoek het festival waarvan je gegevens wilt verzamelen. Kopieer de URL van de hoofdpagina uit de adresbalk.
+Ga naar Partybussen.nl en zoek het festival waarvan je gegevens wilt verzamelen. Kopieer de URL van de hoofdpagina uit de adresbalk.
 
 > **Let op:** Zorg ervoor dat je de link van de hoofdpagina kopieert en niet die van een provinciepagina binnen het festival.
-
----
 
 ### Stap 3: Padsegment van het festival op Partybussen.nl
 
@@ -105,8 +101,6 @@ Uit de volgende URL:
 
 is **thunderdome-alpha-zaterdag-2024** het padsegment.
 
----
-
 ### Stap 4: Gefragmenteerde pagina’s op Partybussen.nl?
 
 Controleer of de busprijzen zijn opgesplitst over subpagina’s per provincie.
@@ -116,4 +110,10 @@ Controleer of de busprijzen zijn opgesplitst over subpagina’s per provincie.
 
   ![partybussen.nl-gefragmenteerde-paginas](src/assets/images/partybussen.nl-gefragmenteerde-paginas.jpg)
 
-Met deze stappen heb je alle benodigde gegevens verzameld om de scraper succesvol te gebruiken.
+### Stap 5: Gebruik van scraper
+
+Nadat je de benodigde gegevens hebt verzameld, kun je deze invoeren in de Chrome-extensie. De extensie genereert vervolgens twee bestanden. Deze bestanden worden opgeslagen in de **output**-map binnen de projectdirectory. Daarnaast worden de bestanden ook gedownload naar je standaard downloadlocatie.
+
+Bij herhaald gebruik van de scraper worden alle gegenereerde bestanden automatisch toegevoegd aan de **output**-map.
+
+Optioneel kun je ChatGPT inschakelen om een analyse van de verzamelde data uit te voeren. ChatGPT voegt hierbij een samenvatting van de analyse toe aan de **output**-map.
