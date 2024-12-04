@@ -15,7 +15,7 @@ async function run(urlSnippet, slug, mainPage, fragmentedPage) {
   const eventSlug = slug;
   const xlsxDocName = eventSlug;
 
-  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+  const browser = await puppeteer.launch({ headless: false, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
   const page = await browser.newPage();
 
   const selectors = [
