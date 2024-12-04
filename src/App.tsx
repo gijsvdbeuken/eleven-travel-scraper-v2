@@ -9,17 +9,28 @@ function App() {
   const [error, setError] = useState({ active: false, message: '' });
   const [processing, setProcessing] = useState<boolean>(false);
 
-  function runScraper(urlSnippet: string, eventSlug: string, mainPage: string, fragmentedPages: boolean) {
+  const runScraper = async (urlSnippet: string, eventSlug: string, mainPage: string, fragmentedPages: boolean) => {
     setProcessing(true);
-    startScraper(urlSnippet, eventSlug, mainPage, fragmentedPages, setError);
-    setProcessing(false);
-  }
+    try {
+      await startScraper(urlSnippet, eventSlug, mainPage, fragmentedPages, setError);
+    } catch (error: any) {
+      setError({ active: true, message: error.message });
+    } finally {
+      setProcessing(false);
+    }
+  };
 
-  function runSummary() {
+  const runSummary = async (eventSlug: string) => {
+    console.log('Summary is running!');
     setProcessing(true);
-    startSummary(setError);
-    setProcessing(false);
-  }
+    try {
+      await startSummary(eventSlug, setError);
+    } catch (error: any) {
+      setError({ active: true, message: error.message });
+    } finally {
+      setProcessing(false);
+    }
+  };
 
   return (
     <>

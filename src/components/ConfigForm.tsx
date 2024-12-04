@@ -9,7 +9,7 @@ interface ConfigFormProps {
   setError: React.Dispatch<React.SetStateAction<ErrorState>>;
   processing: boolean;
   runScraper: (urlSnippet: string, eventSlug: string, mainPage: string, fragmentedPages: boolean) => void;
-  runSummary: () => void;
+  runSummary: (eventSlug: string) => void;
 }
 
 const ConfigForm: React.FC<ConfigFormProps> = ({ setError, processing, runScraper, runSummary }) => {
@@ -24,21 +24,25 @@ const ConfigForm: React.FC<ConfigFormProps> = ({ setError, processing, runScrape
   // analysis
   const [summary, setSummary] = useState<boolean>(false);
 
-  function submitForm(urlSnippet: string, eventSlug: string, mainPage: string, fragmentedPages: boolean, summary: boolean) {
+  async function submitForm(urlSnippet: string, eventSlug: string, mainPage: string, fragmentedPages: boolean, summary: boolean) {
     if (eventSlug === 'template') {
-      urlSnippet = 'free-your-mind-kingsday-2025-vrijdag';
-      eventSlug = 'free-your-mind-kingsday';
-      mainPage = 'https://www.partybussen.nl/festivals/free-your-mind-kingsday-2025-vrijdag';
-      fragmentedPages = true;
+      urlSnippet = 'free-your-mind-kingsday-2025-zaterdag';
+      eventSlug = 'free-your-mind-festival-zaterdag';
+      mainPage = 'https://www.partybussen.nl/festivals/free-your-mind-kingsday-2025-zaterdag';
+      fragmentedPages = false;
     }
+
     setError({ active: false, message: '' });
+
     if (!urlSnippet || !eventSlug || !mainPage) {
       setError({ active: true, message: 'Alle technische velden moeten een waarde hebben.' });
       return;
     }
-    runScraper(urlSnippet, eventSlug, mainPage, fragmentedPages);
+
+    await runScraper(urlSnippet, eventSlug, mainPage, fragmentedPages);
+
     if (summary) {
-      runSummary();
+      await runSummary(eventSlug);
     }
   }
 
