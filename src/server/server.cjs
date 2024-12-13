@@ -95,11 +95,9 @@ app.post('/write-summary-doc', (req, res) => {
   const date = new Date();
   const formattedDate = `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear().toString().slice(-2)}`;
 
-  // Construct the file name using eventSlug and date
   const fileName = `summary_${eventSlug}_${formattedDate}.docx`;
   const outputPath = path.join(__dirname, '..', '..', 'src', 'output', fileName);
 
-  // Ensure the output directory exists
   if (!fs.existsSync(path.dirname(outputPath))) {
     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   }
